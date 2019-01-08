@@ -4,7 +4,7 @@ class MusicPage extends StatelessWidget{
   @override
    Widget build(BuildContext context) {
      return Container(
-       child: Text('图书'),
+       child: Text('音乐'),
      );
    }
 }

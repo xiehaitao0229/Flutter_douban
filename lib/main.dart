@@ -3,6 +3,7 @@ import 'package:douban/entity/movie.dart';
 import 'package:douban/page/bookPage.dart';
 import 'package:douban/page/moviePage.dart';
 import 'package:douban/page/musicPage.dart';
+import 'package:douban/idea/donate.dart';
 import 'value.dart';
 
 void main() => runApp(MyApp());
@@ -12,9 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: Value.appName,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.yellow,
       ),
       home: HomePage(),
     );
@@ -60,11 +61,11 @@ class _HomePageState extends State<HomePage> {
           bottom: index == 0 ? _movieTab() : null,
         ),
         body: _getBody(),
- /*        drawer: Drawer(
+        drawer: Drawer(
           elevation: 8.0,
           semanticLabel: Value.drawerLabel,
           child: DrawerLayout(),
-        ), */
+        ),
         bottomNavigationBar: _getBottomNavigationBar(),
       ),
     );
@@ -86,8 +87,8 @@ class _HomePageState extends State<HomePage> {
     return Text(data);
   }
 
-  //  点击底部导航切换
-   _movieTab() {
+  //  电影页滑动切换
+  _movieTab() {
     return TabBar(
         isScrollable: false,
         tabs: movieTabs.map((MovieTab tab) {
@@ -107,7 +108,7 @@ class _HomePageState extends State<HomePage> {
               children: movieTabs.map((MovieTab tab) {
             if (tab.page == null) {
               tab.offset = 0.0;
-              tab.page = MoviePage(/* tab.address, tab.offset */);
+              tab.page = MoviePage( tab.address, tab.offset );
             }
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -158,5 +159,40 @@ class _HomePageState extends State<HomePage> {
                   title: Text(Value.music));
           }
         }));
+  }
+}
+
+//  左上角的按钮弹窗
+class DrawerLayout extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        _getHeader(context),
+        _getDonateItem(),
+        _getAboutItem(),
+      ],
+    );
+  }
+
+  _getHeader(BuildContext context) {
+    return DrawerHeader();
+  }
+
+  _getDonateItem() {
+    return DonateListTile(
+        icon: Icon(Icons.supervisor_account),
+        child: Text(Value.support),
+        authorDes: Value.supportTip,
+        title: Value.supportTitle);
+  }
+
+  _getAboutItem() {
+    return AboutListTile(
+      icon: Icon(Icons.person),
+      child: Text(Value.about),
+      applicationName: Value.appName,
+      applicationVersion: 'version:${Value.appVersion}',
+    );
   }
 }
