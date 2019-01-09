@@ -105,6 +105,48 @@ openByWeb(BuildContext context, String url, String errorTip,
   }
 }
 
+//加载网页按钮
+class WebButton extends StatelessWidget {
+  WebButton({@required this.text, @required this.url, this.errorTip});
+
+  final String text;
+  final String url;
+  final String errorTip;
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return RaisedButton(
+      child: Text(text),
+      onPressed: () {
+        openByWeb(context, url, errorTip, false);
+      },
+    );
+  }
+}
+
+class WebText extends StatelessWidget {
+  WebText({@required this.text, @required this.url, this.errorTip});
+
+  final String text;
+  final String url;
+  final String errorTip;
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return GestureDetector(
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.title.copyWith(color: Colors.blue),
+      ),
+      onTap: () {
+        openByWeb(context, url, errorTip, true);
+      },
+    );
+  }
+}
+
 //  显示加载转圈组件
 class LoadingProgress extends StatelessWidget {
   getProgressDialog() {

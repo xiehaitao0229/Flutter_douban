@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:douban/entity/book.dart';
 import 'package:douban/http/HttpManagert.dart' as HttpManager;
 import 'package:douban/utils/Utils.dart';
+import 'package:douban/info/book_info.dart';
 import 'package:douban/value.dart';
 
 class BookPage extends StatefulWidget {
@@ -183,11 +184,38 @@ class BookItem extends StatelessWidget {
     return starWidget;
   }
 
+  //  点击跳转详情
+  _onclick(BuildContext context){
+    Navigator.push(
+        context,
+        new PageRouteBuilder(
+            pageBuilder: (BuildContext context, _, __) {
+              return BookInfo(
+                book: book,
+              );
+            },
+            opaque: false,
+            transitionDuration: new Duration(milliseconds: 200),
+            transitionsBuilder:
+                (___, Animation<double> animation, ____, Widget child) {
+              return new FadeTransition(
+                opacity: animation,
+                child: new ScaleTransition(
+                  scale: new Tween<double>(begin: 0.5, end: 1.0)
+                      .animate(animation),
+//                  position: new Tween<Offset>(begin: const Offset(-1.0, 0.0),end: Offset.zero)
+//                      .animate(animation),
+                  child: child,
+                ),
+              );
+            }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // _onclick(context);
+         _onclick(context);
       },
       child: Card(
         child: Stack(
