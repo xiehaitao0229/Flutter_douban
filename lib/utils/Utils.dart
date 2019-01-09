@@ -95,6 +95,16 @@ class WebIconButton extends StatelessWidget {
   }
 }
 
+openByWeb(BuildContext context, String url, String errorTip,
+    bool forceWebView) async {
+  if (await canLaunch(url)) {
+    await launch(url, forceWebView: forceWebView);
+  } else {
+    _showDialog(
+        context: context, content: errorTip ?? Value.loadingWebErrorTip);
+  }
+}
+
 //  显示加载转圈组件
 class LoadingProgress extends StatelessWidget {
   getProgressDialog() {

@@ -13,6 +13,7 @@ environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
+  html: "^0.13.3"
   url_launcher: "^3.0.1"
   share: "0.5.1"
   flutter:

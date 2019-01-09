@@ -34,8 +34,8 @@ class _MoviePageState extends State<MoviePage> {
           });
         },
         onSuccess: (String body) {
-          print(widget.dataPath); //  /v2/movie/coming_soon
-          print(json.decode(body));
+        //  print(widget.dataPath); //  /v2/movie/coming_soon
+        //  print(json.decode(body));
           setState(() {
             widget.isLoad = true; //加载成功后，将已加载状态设置为true
             widget.movieList = Movie.movieList(json.decode(body));

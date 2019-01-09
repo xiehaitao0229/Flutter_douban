@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
       case 1:
         if (bookPage == null) {
           double offset = 0.0;
-          bookPage = BookPage(/* offset */);
+          bookPage = BookPage(offset);
         }
         return bookPage;
       case 2:
